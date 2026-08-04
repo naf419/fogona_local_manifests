@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote name="naf" fetch="https://github.com/naf419/" />
+
+  <project path="device/motorola/fogona" remote="naf" name="android_device_motorola_fogona" revision="lineage-22.2" />
+
+  <!-- TODO: themuppets vendor/motorola/fogona instead of extract-files.py/setup-makesfiles.py? -->
+
+  <!-- qcom-caf/common modded to split sm6225 5.15 from sm6225 4.19 devices -->
+  <remove-project name="LineageOS/android_hardware_qcom-caf_common" />
+  <project path="hardware/qcom-caf/common" remote="naf" name="android_hardware_qcom-caf_common" revision="lineage-22.2">
+    <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
+    <!-- add guards for CAF repositories -->
+    <linkfile src="os_pickup_sepolicy_vndr.mk" dest="device/qcom/sepolicy_vndr/SEPolicy.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/msm8953/Android.bp" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8996/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/msm8996/Android.mk" />
+    <linkfile src="os_pickup.bp" dest="hardware/qcom-caf/msm8998/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sdm660/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sdm845/Android.bp" />
+    <linkfile src="os_pickup_audio-ar.mk" dest="hardware/qcom-caf/sm6225-5.15/audio/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm6225-5.15/Android.bp" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8150/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8150/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8250/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8250/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8350/Android.bp" />
+    <linkfile src="os_pickup.mk" dest="hardware/qcom-caf/sm8350/Android.mk" />
+    <linkfile src="os_pickup_audio-ar.mk" dest="hardware/qcom-caf/sm8450/audio/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8450/Android.bp" />
+    <linkfile src="os_pickup_audio-ar.mk" dest="hardware/qcom-caf/sm8550/audio/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8550/Android.bp" />
+    <linkfile src="os_pickup_audio-ar.mk" dest="hardware/qcom-caf/sm8650/audio/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8650/Android.bp" />
+    <linkfile src="os_pickup_audio-ar.mk" dest="hardware/qcom-caf/sm8750/audio/Android.mk" />
+    <linkfile src="os_pickup_qssi.bp" dest="hardware/qcom-caf/sm8750/Android.bp" />
+  </project>
+
+  <!-- sm6225-5.15 display HAL from qcom-caf tag for fogona --> 
+  <project path="hardware/qcom-caf/sm6225-5.15/display" remote="naf" name="android_hardware_qcom_display" revision="sm6225-5.15" />
+  <!-- sm6225-5.15 media HAL from sm8350   TODO: this ceased to exist in 22.1? -->
+  <project path="hardware/qcom-caf/sm6225-5.15/media" name="LineageOS/android_hardware_qcom_media" revision="lineage-22.1-caf-sm8350" />
+  <!-- sm6225-5.15 audio HAL from sm8450 -->
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/agm" name="LineageOS/android_vendor_qcom_opensource_agm" groups="qcom,waipio-vendor" revision="lineage-22.2-caf-sm8450" />
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/pal" name="LineageOS/android_vendor_qcom_opensource_arpal-lx" groups="qcom,waipio-vendor" revision="lineage-22.2-caf-sm8450" />
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/primary-hal" name="LineageOS/android_hardware_qcom_audio-ar" groups="qcom,waipio-vendor" revision="lineage-22.2-caf-sm8450" />
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/graphservices" name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" groups="qcom" revision="lineage-22.2-caf-sm8450" />
+
+  <!-- need libvmmem for display HAL, but it doesn't exist until 23.2 -->
+  <project path="vendor/qcom/opensource/libvmmem" name="LineageOS/android_vendor_qcom_opensource_libvmmem" revision="lineage-23.2" />
+
+  <!-- needed for MotoActions. TODO: should be in lineage.dependencies instead? -->
+  <!-- sepolicy in 22.2 has vendor_nfc_prop which conflicts with qcom sepolicy. use 23.3 instead
+       but that depends on 23.3's EuiccPolicy so get that too -->
+  <project path="hardware/motorola" remote="github" name="LineageOS/android_hardware_motorola" revision="lineage-23.3" />
+  <project path="packages/apps/EuiccPolicy" remote="github" name="LineageOS/android_packages_apps_EuiccPolicy" revision="lineage-23.2" />
+
+</manifest>
