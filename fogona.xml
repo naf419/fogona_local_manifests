@@ -3,13 +3,13 @@
 
   <remote name="naf" fetch="https://github.com/naf419/" />
 
-  <project path="device/motorola/fogona" remote="naf" name="android_device_motorola_fogona" revision="lineage-22.2" />
+  <project path="device/motorola/fogona" remote="naf" name="android_device_motorola_fogona" revision="lineage-21.0" />
 
   <!-- TODO: themuppets vendor/motorola/fogona instead of extract-files.py/setup-makesfiles.py? -->
 
   <!-- qcom-caf/common modded to split sm6225 5.15 from sm6225 4.19 devices -->
   <remove-project name="LineageOS/android_hardware_qcom-caf_common" />
-  <project path="hardware/qcom-caf/common" remote="naf" name="android_hardware_qcom-caf_common" revision="lineage-22.2">
+  <project path="hardware/qcom-caf/common" remote="naf" name="android_hardware_qcom-caf_common" revision="lineage-21.0">
     <linkfile src="os_pickup_aosp.mk" dest="hardware/qcom/Android.mk" />
     <!-- add guards for CAF repositories -->
     <linkfile src="os_pickup_sepolicy_vndr.mk" dest="device/qcom/sepolicy_vndr/SEPolicy.mk" />
@@ -41,15 +41,26 @@
   <project path="hardware/qcom-caf/sm6225-5.15/display" remote="naf" name="android_hardware_qcom_display" revision="sm6225-5.15" />
   <!-- sm6225-5.15 media HAL from sm8350   TODO: this ceased to exist in 22.1? -->
   <project path="hardware/qcom-caf/sm6225-5.15/media" name="LineageOS/android_hardware_qcom_media" revision="lineage-22.1-caf-sm8350" />
-  <!-- sm6225-5.15 audio HAL from sm8450 -->
-  <project path="hardware/qcom-caf/sm6225-5.15/audio/agm" name="LineageOS/android_vendor_qcom_opensource_agm" groups="qcom,waipio-vendor" revision="lineage-22.2-caf-sm8450" />
-  <project path="hardware/qcom-caf/sm6225-5.15/audio/pal" name="LineageOS/android_vendor_qcom_opensource_arpal-lx" groups="qcom,waipio-vendor" revision="lineage-22.2-caf-sm8450" />
-  <project path="hardware/qcom-caf/sm6225-5.15/audio/primary-hal" name="LineageOS/android_hardware_qcom_audio-ar" groups="qcom,waipio-vendor" revision="lineage-22.2-caf-sm8450" />
-  <project path="hardware/qcom-caf/sm6225-5.15/audio/graphservices" name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" groups="qcom" revision="lineage-22.2-caf-sm8450" />
+  <!-- sm6225-5.15 audio HAL from 22.1 sm8450 (libar-pal was blob-ed until 22.1) -->
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/agm" name="LineageOS/android_vendor_qcom_opensource_agm" groups="qcom,waipio-vendor" revision="lineage-22.1-caf-sm8450" />
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/pal" name="LineageOS/android_vendor_qcom_opensource_arpal-lx" groups="qcom,waipio-vendor" revision="lineage-22.1-caf-sm8450" />
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/primary-hal" name="LineageOS/android_hardware_qcom_audio-ar" groups="qcom,waipio-vendor" revision="lineage-22.1-caf-sm8450" />
+  <project path="hardware/qcom-caf/sm6225-5.15/audio/graphservices" name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" groups="qcom" revision="lineage-22.1-caf-sm8450" />
+
+  <!-- need matching st-hal-ar from 22.1 to consume libaudio_extn_headers -->
+  <remove-project name="LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal-ar" />
+  <project path="vendor/qcom/opensource/audio-hal/st-hal-ar" name="LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal-ar" revision="lineage-22.1" />
 
   <!-- need libvmmem for display HAL, but it doesn't exist until 23.2 -->
   <project path="vendor/qcom/opensource/libvmmem" name="LineageOS/android_vendor_qcom_opensource_libvmmem" revision="lineage-23.2" />
 
   <!-- needed for MotoActions. TODO: should be in lineage.dependencies instead? -->
-  <project path="hardware/motorola" remote="github" name="LineageOS/android_hardware_motorola" revision="lineage-22.2" />
-</manifest>
+  <project path="hardware/motorola" remote="github" name="LineageOS/android_hardware_motorola" revision="lineage-21" />
+
+  <!-- need 23.3 extract-utils since we use the python version of extract-files instead of the 21-era .sh version -->
+  <remove-project name="LineageOS/android_prebuilts_extract-tools" />
+  <remove-project name="LineageOS/android_tools_extract-utils" />
+  <project path="prebuilts/extract-tools" name="LineageOS/android_prebuilts_extract-tools" clone-depth="1" revision="lineage-23.2"/>
+  <project path="tools/extract-utils" name="LineageOS/android_tools_extract-utils" revision="lineage-23.2"/>
+
+  </manifest>
