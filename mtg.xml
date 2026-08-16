@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-    <remote name="mtg" fetch="https://gitlab.com/MindTheGapps/" />
+    <remote name="mtg" fetch="https://github.com/MindTheGapps/" />
 
-    <project path="vendor/gapps" name="vendor_gapps" remote="mtg" revision="vic" />
+    <project path="vendor/gapps" name="vendor_gapps" remote="mtg" revision="baklava" />
 </manifest>
