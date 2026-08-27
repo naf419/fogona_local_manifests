@@ -10,6 +10,7 @@
   <!-- share kernel with sm8550. kernel needs fixes already in 23.2, so use that -->
   <project path="kernel/motorola/sm8550" remote="naf" name="android_kernel_motorola_sm8550" revision="lineage-23.2" />
   <project path="kernel/motorola/sm8550-modules" remote="naf" name="android_kernel_motorola_sm8550-modules" revision="lineage-23.2" />
+  <project path="kernel/motorola/sm8550-devicetrees" remote="naf" name="android_kernel_motorola_sm8550-devicetrees" revision="lineage-23.2" />
 
   <!-- qcom-caf/common modded to split sm6225 5.15 from sm6225 4.19 devices -->
   <remove-project name="LineageOS/android_hardware_qcom-caf_common" />
