@@ -4,8 +4,7 @@
   <remote name="naf" fetch="https://github.com/naf419/" />
 
   <project path="device/motorola/fogona" remote="naf" name="android_device_motorola_fogona" revision="lineage-23.2" />
-
-  <!-- TODO: themuppets vendor/motorola/fogona instead of extract-files.py/setup-makesfiles.py? -->
+  <project path="vendor/motorola/fogona" remote="naf" name="proprietary_vendor_motorola_fogona" revision="lineage-23.2" />
 
   <project path="kernel/motorola/sm8550" remote="naf" name="android_kernel_motorola_sm8550" revision="lineage-23.2" />
   <project path="kernel/motorola/sm8550-modules" remote="naf" name="android_kernel_motorola_sm8550-modules" revision="lineage-23.2" />
